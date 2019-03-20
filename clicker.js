@@ -15,7 +15,7 @@ function Game() {
 		param.money += game.factories.clicker.moneyClick();
 		game.update();
 	}
-
+	//adds coins per click per level
 	game.factories = {
 		clicker: {
 			title: 'Gold Finder',
@@ -27,7 +27,9 @@ function Game() {
 				return Math.pow(this.level, 3);
 			}
 		},
-		gold: {
+		//adds the auto clickers and how many clicks per upgrade
+		//adds gold drill
+		goldDrill: {
 			title: 'Gold Drill',
 			level: 0,
 			money: function () {
@@ -37,7 +39,8 @@ function Game() {
 				return (this.level + 1) * 10;
 			}
 		},
-		petushok: {
+		//adds bank interest
+		bankInt: {
 			title: 'Bank Interest',
 			level: 0,
 			money: function () {
@@ -47,7 +50,8 @@ function Game() {
 				return (this.level + 1) * 300;
 			}
 		},
-		farmer: {
+		//adds stock market
+		stockMar: {
 			title: 'Stock Market',
 			level: 0,
 			money: function () {
@@ -57,7 +61,8 @@ function Game() {
 				return (this.level + 1) * 3000;
 			}
 		},
-		fabrika: {
+		//adds sonar tracking
+		sonarTra: {
 			title: 'Sonar Tracking',
 			level: 0,
 			money: function () {
@@ -67,7 +72,8 @@ function Game() {
 				return (this.level + 1) * 7500;
 			}
 		},
-		maginhat: {
+		//adds satilite tracker
+		satiliteTra: {
 			title: 'Satilite Tracking',
 			level: 0,
 			money: function () {
@@ -78,7 +84,7 @@ function Game() {
 			}
 		}
 	};
-
+//adds total amounts of money and displays it
 	game.checkFactories = function () {
 
 		var totalMoney = 0;
@@ -91,7 +97,7 @@ function Game() {
 		return totalMoney;
 
 	}
-
+//updates money ammount
 	game.update = function () {
 		param.profitTarget.innerHTML = game.checkFactories();
 		param.moneyTarget.innerHTML = param.money;
@@ -109,7 +115,7 @@ function Game() {
 			}
 		}
 	}
-
+//adds an alert when you reach 1000000 gold
 	game.interval = function () {
 		var dataStart = Date.now();
 		if (param.money >= 1000000 && !param.win) {
@@ -124,7 +130,7 @@ function Game() {
 		dataTarget.innerHTML = dataEnd - dataStart;
 		setTimeout(game.interval, param.time);
 	}
-
+//checks to make sure you have enough money for an upgrade and adds visual affect
 	function find(obj, childrenClass) {
 		for (var i = 0; i < obj.childNodes.length; i++) {
 			if (obj.childNodes[i].className == childrenClass) {
@@ -154,7 +160,7 @@ function Game() {
 			game.update();
 		}
 	}
-
+//updates the auto clickers and clicker levels
 	function init() {
 		for (var f in game.factories) {
 			var factory = game.factories[f],
@@ -196,7 +202,7 @@ function Game() {
 
 			document.getElementById('factoriesContainer').appendChild(container);
 		}
-
+//changes the computer pointer
 		var eventType;
 		if ('ontouchstart' in window) {
 			eventType = 'touchstart';
