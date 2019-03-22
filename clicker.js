@@ -10,13 +10,17 @@ function Game() {
     win: false
 	}
 	var dataTarget = document.getElementById('dataVal');
-
+	//adds a click to the counter when the button is clicked
 	game.click = function() {
 		param.money += game.factories.clicker.moneyClick();
 		game.update();
+		
+		var audio = document.getElementById("goldSound");
+		audio.play();
 	}
-
+	//adds ugrades
 	game.factories = {
+		//adds extra click per upgrade
 		clicker: {
 			title: 'Gold Finder',
 			level: 1,
@@ -27,7 +31,8 @@ function Game() {
 				return Math.pow(this.level, 3);
 			}
 		},
-		chicken: {
+		//added auto clickers
+		goldDrill: {
 			title: 'Gold Drill',
 			level: 0,
 			money: function() {
@@ -37,7 +42,7 @@ function Game() {
 				return (this.level+1)*10;
 			}
 		},
-		petushok: {
+		bankInt: {
 			title: 'Bank Interest',
 			level: 0,
 			money: function() {
@@ -47,7 +52,7 @@ function Game() {
 				return (this.level+1)*300;
 			}
 		},
-		farmer: {
+		stockMar: {
 			title: 'Stock Market',
 			level: 0,
 			money: function() {
@@ -57,7 +62,7 @@ function Game() {
 				return (this.level+1)*3000;
 			}
 		},
-		fabrika: {
+		sonarTra: {
 			title: 'Sonar Tracking',
 			level: 0,
 			money: function() {
@@ -67,7 +72,7 @@ function Game() {
 				return (this.level+1)*7500;
 			}
 		},
-		maginhat: {
+		satiliteTra: {
 			title: 'Satilite Tracking',
 			level: 0,
 			money: function() {
@@ -78,7 +83,7 @@ function Game() {
 			}
 		}
 	};
-
+	//adds clickes from auto clickers
 	game.checkFactories = function() {
 
 		var totalMoney = 0;
@@ -95,6 +100,7 @@ function Game() {
 	game.update = function() {
 		param.profitTarget.innerHTML = game.checkFactories();
 		param.moneyTarget.innerHTML = param.money;
+		
 
 		for (var f in game.factories) {
       
@@ -109,7 +115,7 @@ function Game() {
 			}
 		}
 	}
-	
+	//adds a win message at 1000000 gold
 	game.interval = function() {
 		var dataStart = Date.now();
     if (param.money >= 1000000 && !param.win) {
@@ -124,7 +130,7 @@ function Game() {
 		dataTarget.innerHTML = dataEnd - dataStart;
 		setTimeout(game.interval, param.time);
 	}
-
+	//updates clicker with every upgrade
 	function find(obj, childrenClass) {
 		for (var i = 0; i < obj.childNodes.length; i++) {
 		    if (obj.childNodes[i].className == childrenClass) {
@@ -182,7 +188,7 @@ function Game() {
 				container.appendChild(factory.moneyClickTarget);
 			}
 
-
+			//udates the upgrade price
 			elm.className = 'factory-cost';
 			elm.innerHTML = game.factories[f].cost();
 			factory.costTarget = elm.cloneNode(true);
@@ -196,7 +202,7 @@ function Game() {
 
 			document.getElementById('factoriesContainer').appendChild(container);
 		}
-    
+		//changes the mouse curser
     var eventType;
     if ('ontouchstart' in window) {
       eventType = 'touchstart';
