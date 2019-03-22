@@ -8,6 +8,7 @@ html {
 }
 body {
 	font-family: 'PT Sans Narrow', sans-serif;
+	background-image: url("57394-1-1412946584.jpg");
 }
 .layout {
 	max-width: 880px;
@@ -24,7 +25,8 @@ body {
   left: 0;
   width: 100%;
   text-align: center;
-  background-color: #fff;
+  background-color: transparent;
+	color: white;
 }
 
 
